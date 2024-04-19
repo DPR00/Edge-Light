@@ -52,7 +52,7 @@ void txrx_loop() {
   lux_buffer[i_write] = tcs[cs_i].read16(cs_channel);
 
   // Start logging if index is lower than log_buffer_size and it is time to start logging
-  if (i_log < log_buffer_size+1 && start_log) {
+  if (i_log < log_buffer_size + 1 && start_log) {
     lux_log[i_log] = lux_buffer[i_write];
     i_log++;
   }
@@ -83,7 +83,7 @@ Funtion to decode the frequency (bit) that the other robot is sending
 */
 uint8_t decode_bit_fft() {
   uint8_t bit = 0;  // Initialize bit
-  double m = 0;     // temp real componente
+  double m = -1000;     // temp real component
   uint8_t i;        // index to iterate over buffer
 
   // Eliminate DC component
@@ -98,16 +98,18 @@ uint8_t decode_bit_fft() {
 
   //All frequencies
   for (i = 0; i <= adc_buffer_size >> 2; i++) {
-    if (vReal[i] > m) {
-      m = vReal[i];
-      bit = i;
+    if (i == 2 || i == 4 || i == 5 || i == 8) {
+      if (vReal[i] > m) {
+        m = vReal[i];
+        bit = i;
+      }
     }
   }
 
   // Send decoded bit to microbit
   Serial.write(bit + 48);
   Serial.write('\n');
-  
+
   // Start logging decoded bits
   if (b_log < 256 && start_log) {
     bit_log[b_log] = bit;

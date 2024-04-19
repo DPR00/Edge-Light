@@ -69,16 +69,15 @@ void txrx_loop() {
     out1 = out1 ^ 1;
     digitalWrite(lcd1, out1);
   }
-
 }
 
 /*
 Funtion to decode the frequency (bit) that the other robot is sending 
 */
 uint8_t decode_bit_fft() {
-  uint8_t bit = 0;  // Initialize bit
-  double m = 0;     // temp real componente
-  uint8_t i;        // index to iterate over buffer
+  uint8_t bit = 0;        // Initialize bit
+  double m1 = 0, m2 = 0;  // temp real componente
+  uint8_t i;              // index to iterate over buffer
 
   // Eliminate DC component
   for (i = 0; i < adc_buffer_size; i++) {
@@ -92,17 +91,36 @@ uint8_t decode_bit_fft() {
 
   //All frequencies
   for (i = 0; i <= adc_buffer_size >> 2; i++) {
-    if (vReal[i] > m) {
-      m = vReal[i];
-      bit = i;
+    if (i == 2 || i == 4 || i == 5 || i == 8) {
+      if (vReal[i] > m1) {
+        m2 = m1;
+        m1 = vReal[i];
+        bit = i;
+      } else if (vReal[i] > m2) {
+        m2 = vReal[i];
+      }
     }
   }
 
-  // Send decoded bit to microbit
-  Serial.write(bit + 48);
-  Serial.write('\n');
+  double ratio = 0;
+  if (m1 == 0 || m2 == 0) {
+    //Serial.println("0");
+    ratio = 0;
+  } else {
+    //Serial.println(m1 / m2);
+    ratio = m1 / m2;
+  }
 
-  return bit;
+  if (ratio > threshold) {
+    // Send decoded bit to microbit
+    Serial.write(bit + 48);
+    Serial.write('\n');
+    return bit;
+  } else {
+    Serial.write(0 + 48);
+    Serial.write('\n');
+    return 0;
+  }
 }
 
 
@@ -181,9 +199,9 @@ void setup() {
   for (cs_i = 0; cs_i < NUMBER_OF_CS; cs_i++) {
     if (calibrate_cs(cs_i)) {
     } else {
-      Serial.print("Calibration color sensor ");
-      Serial.print(cs_i);
-      Serial.print(" error.");
+      // Serial.print("Calibration color sensor ");
+      // Serial.print(cs_i);
+      // Serial.print(" error.");
     }
   }
 

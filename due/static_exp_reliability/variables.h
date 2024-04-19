@@ -15,8 +15,8 @@ volatile uint8_t i_timer = 0;  // Counter for timer
 
 // Signal and FFT
 const uint8_t adc_buffer_size = 32;                               // FIFO buffer size
-volatile uint8_t period = 16;                                     // Period of the signal {15, 16}
-volatile uint8_t symbol_tx = 8;                                   // Symbol represents the timer divisor for frequency change. CHANGE
+volatile uint8_t period = 15;                                     // Period of the signal {15, 16}
+volatile uint8_t symbol_tx = 3;                                   // Symbol represents the timer divisor for frequency change. CHANGE
 const uint8_t fft_size = 32;                                      // size of fft
 const uint8_t fft_shift = 5;                                      // Shift of FFT for DC component
 const uint8_t f_sampling = 40;                                    // sampling freq: 1/DATA_RATE
@@ -54,3 +54,4 @@ uint8_t bit_log[log_buffer_size];   // buffer for logging decoded bits
 
 // Loop
 String stage;  // Stage received from Microbit
+double threshold = 3; // bit2: 4, bit4: 3, bit5: 2, bit 8: 3

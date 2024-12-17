@@ -19,11 +19,11 @@ We modify a Maqueen Plus v2 educational robot for our purposes. Each modified ro
 - Liquid Crystal (LC)
 - Luminescent Solar Concentrator (LSC).
 
-The Microbit allow us to program the educational robot, while the Arduino platform enables to communicate and control the rest of the hardware as well as perform FFT computations. Therefore, the organiztion of this repository is divided in three main folders: `arduino`, `microbit` and `scripts`. The latter is used mainly to receive data from Arduino and analize it. 
+The Microbit allow us to program the educational robot, while the Arduino platform enables us to communicate and control the rest of the hardware as well as to perform FFT computations. Therefore, the organiztion of this repository is divided in three main folders: `arduino`, `microbit` and `scripts`. The latter is used mainly to receive data from Arduino and analize it. 
 
 ### 🤖 Arduino
 ---
-This folder contains all the arduino related code. We use an Arduino Due because of the different ports it has to communicate with the hardware and its computational capacity. The following table give details about each subfolder. Further instructions can be found in each `.ino` file.
+This folder contains all the arduino related code. We use an Arduino Due because of the different ports it has to communicate with the hardware and its computational capacity. The following table gives details about each subfolder. Further instructions can be found in each `.ino` file.
 
 | **Subfolder name**      | **Description**                                                                                                 |
 |-------------------------|-----------------------------------------------------------------------------------------------------------------|
@@ -38,18 +38,18 @@ This folder contains all the microbit related code. Further details can be found
 
 ### 💻 scripts
 ---
-This folder contains Python scripts to receive data from an Arduino Due over serial communication, analyze it and generate plots. It is divided in `green` and `red` subfolders referring to the color of each robot's LSC. However, both subfolders are pretty similar and the main difference is in the `constants_{color}.py` file. We create both subfolders just for simplicity when performing experiments. The following table provide a brief description of each file.
+This folder contains Python scripts to receive data from an Arduino Due over serial communication, analyze it and generate plots. It is divided in `green` and `red` subfolders referring to the color of each robot's LSC. However, both subfolders are very similar and the main difference is the `constants_{color}.py` file. We create both subfolders just for simplicity when performing experiments. The following table provides a brief description of each file.
 
 | **Subfolder name**        | **Description**                                                                                                            |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| `color_sensor_{color}.py` | It retrieves the Color sensor data when performing experiments (static or dynamic) and save it in a `csv` file.            |
+| `color_sensor_{color}.py` | Retrieves the color sensor data when performing experiments (static or dynamic) and saves it in a `csv` file.            |
 | `constants_{color}.py`    | Constant values used in other scripts.                                                                                     |
-| `main_{color}.py`         | It retrieves the decoded bits sent by the LSC when performing experiments (static or dynamic) and save it in a `csv` file. |
+| `main_{color}.py`         | Retrieves the decoded bits sent by the LSC when performing experiments (static or dynamic) and saves it in a `csv` file. |
 | `Utils_{color}.py`        | Contains different utility functions to retrieve data, analyze data and generate plots.                                    |
 
 ## Citation
 
-If you find this useful for your academic work, please cite our original [paper](https://doi.org/10.1145/3678574).
+If you find this repo useful for your academic work, please cite our original [paper](https://doi.org/10.1145/3678574).
 
 ```bibtex
 @article{10.1145/3678574,

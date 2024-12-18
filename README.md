@@ -47,6 +47,9 @@ This folder contains Python scripts to receive data from an Arduino Due over ser
 | `main_{color}.py`         | Retrieves the decoded bits sent by the LSC when performing experiments (static or dynamic) and saves it in a `csv` file. |
 | `Utils_{color}.py`        | Contains different utility functions to retrieve data, analyze data and generate plots.                                    |
 
+### Hardware models
+[This site](https://github.com/mchavezt86/FreeCAD-PhD/tree/master/Edge-Light) contains the 3D models of the hardware using to build the Edge-Light system.
+
 ## Citation
 
 If you find this repo useful for your academic work, please cite our original [paper](https://doi.org/10.1145/3678574).
